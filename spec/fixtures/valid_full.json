@@ -1,0 +1,138 @@
+{
+  "format_version": "0.1.0",
+  "run_id": "run_enterprise_001",
+  "agent_name": "support-agent",
+  "app_name": "customer-portal",
+  "step_id": "step_003",
+  "step_index": 2,
+  "step_label": "resolve_ticket",
+  "started_at": "2026-03-29T10:00:00.000Z",
+  "completed_at": "2026-03-29T10:00:03.500Z",
+  "sections": [
+    {
+      "section_id": "sys_001",
+      "type": "system_prompt",
+      "source": "system",
+      "token_count": 500,
+      "content": "You are a customer support agent. Follow company guidelines.",
+      "metadata": { "version": "2.1", "last_updated": "2026-03-01" }
+    },
+    {
+      "section_id": "user_001",
+      "type": "user_message",
+      "source": "user",
+      "token_count": 120,
+      "content": "My order #12345 hasn't arrived. It's been 2 weeks."
+    },
+    {
+      "section_id": "rag_001",
+      "type": "retrieval",
+      "source": "rag:pinecone",
+      "token_count": 350,
+      "content": "Order #12345: shipped 2026-03-15, carrier: FedEx, tracking: 7890...",
+      "query": "order 12345 shipping status",
+      "source_collection": "orders",
+      "score": 0.94,
+      "document_id": "doc_order_12345"
+    },
+    {
+      "section_id": "tool_001",
+      "type": "tool_result",
+      "source": "tool:shipping_tracker",
+      "token_count": 80,
+      "content": "{\"status\": \"in_transit\", \"eta\": \"2026-04-01\", \"location\": \"Memphis, TN\"}",
+      "tool_name": "shipping_tracker",
+      "tool_call_id": "tc_ship_001"
+    },
+    {
+      "section_id": "mem_001",
+      "type": "memory",
+      "source": "memory:episodic",
+      "token_count": 60,
+      "content": "Customer contacted 3 days ago about same order. Was told to wait.",
+      "memory_type": "episodic"
+    },
+    {
+      "section_id": "inst_001",
+      "type": "instruction",
+      "source": "guardrail",
+      "token_count": 40,
+      "content": "Never share internal tracking system URLs with customers."
+    }
+  ],
+  "token_budget": {
+    "total_budget": 8000,
+    "total_used": 1150,
+    "by_section": [
+      { "section_id": "sys_001", "section_type": "system_prompt", "token_count": 500 },
+      { "section_id": "user_001", "section_type": "user_message", "token_count": 120 },
+      { "section_id": "rag_001", "section_type": "retrieval", "token_count": 350 },
+      { "section_id": "tool_001", "section_type": "tool_result", "token_count": 80 },
+      { "section_id": "mem_001", "section_type": "memory", "token_count": 60 },
+      { "section_id": "inst_001", "section_type": "instruction", "token_count": 40 }
+    ],
+    "rejected": [
+      {
+        "section_type": "retrieval",
+        "source": "rag:pinecone",
+        "token_count": 2400,
+        "reason": "token_limit_exceeded",
+        "reason_detail": "Full order history (47 entries) exceeded remaining budget"
+      },
+      {
+        "section_type": "retrieval",
+        "source": "rag:confluence",
+        "token_count": 800,
+        "reason": "relevance_below_threshold",
+        "reason_detail": "Shipping policy doc scored 0.31, below 0.5 threshold"
+      },
+      {
+        "section_type": "memory",
+        "source": "memory:long_term",
+        "token_count": 150,
+        "reason": "staleness",
+        "reason_detail": "Customer preference data last updated 14 months ago"
+      }
+    ]
+  },
+  "model": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-20250514",
+    "temperature": 0.3,
+    "max_tokens": 2048,
+    "top_p": 0.95,
+    "stop_sequences": null,
+    "additional_params": { "cache_control": true }
+  },
+  "output": {
+    "type": "mixed",
+    "text": "I can see your order #12345 is currently in transit...",
+    "tool_calls": [
+      {
+        "tool_call_id": "tc_notify_001",
+        "tool_name": "send_notification",
+        "arguments": { "customer_id": "cust_789", "message": "Your order is on its way" }
+      }
+    ],
+    "stop_reason": "end_turn"
+  },
+  "metrics": {
+    "latency_ms": 3500,
+    "input_tokens": 1150,
+    "output_tokens": 340,
+    "cache_read_tokens": 500,
+    "cache_creation_tokens": null,
+    "cost_estimate_usd": 0.008550
+  },
+  "multi_agent": {
+    "parent_run_id": "run_orchestrator_001",
+    "parent_step_id": "step_dispatch_002",
+    "delegation_scope": "resolve_shipping_complaint",
+    "inherited_sections": ["sys_001", "user_001"]
+  },
+  "extensions": {
+    "ticket_id": "TICKET-456",
+    "customer_tier": "premium",
+    "compliance_region": "EU"
+  }
+}

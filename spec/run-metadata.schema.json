@@ -1,0 +1,138 @@
+{
+  "properties": {
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "agent_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Agent Name"
+    },
+    "app_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "App Name"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Completed At"
+    },
+    "step_count": {
+      "minimum": 0,
+      "title": "Step Count",
+      "type": "integer"
+    },
+    "total_input_tokens": {
+      "minimum": 0,
+      "title": "Total Input Tokens",
+      "type": "integer"
+    },
+    "total_output_tokens": {
+      "minimum": 0,
+      "title": "Total Output Tokens",
+      "type": "integer"
+    },
+    "total_latency_ms": {
+      "minimum": 0,
+      "title": "Total Latency Ms",
+      "type": "number"
+    },
+    "total_cost_estimate_usd": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Total Cost Estimate Usd"
+    },
+    "status": {
+      "enum": [
+        "running",
+        "completed",
+        "errored"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "models_used": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Models Used",
+      "type": "array"
+    },
+    "tags": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tags"
+    },
+    "content_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Content Hash"
+    }
+  },
+  "required": [
+    "run_id",
+    "started_at",
+    "step_count",
+    "total_input_tokens",
+    "total_output_tokens",
+    "total_latency_ms",
+    "status",
+    "models_used"
+  ],
+  "title": "RunMetadata",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contextpack.org/schema/0.1.0/run-metadata.json"
+}

@@ -1,0 +1,63 @@
+{
+  "format_version": "0.1.0",
+  "run_id": "run_agent_002",
+  "agent_name": "react-agent",
+  "step_id": "step_tool_loop",
+  "step_index": 4,
+  "started_at": "2026-03-29T10:00:05.000Z",
+  "completed_at": "2026-03-29T10:00:05.800Z",
+  "sections": [
+    {
+      "section_id": "sys",
+      "type": "system_prompt",
+      "token_count": 200,
+      "content": "You are a ReAct agent. Use tools to answer questions."
+    },
+    {
+      "section_id": "user",
+      "type": "user_message",
+      "token_count": 15,
+      "content": "What's the weather in Paris?"
+    },
+    {
+      "section_id": "prev_tool",
+      "type": "tool_result",
+      "source": "tool:geocode",
+      "token_count": 25,
+      "content": "{\"lat\": 48.8566, \"lon\": 2.3522}",
+      "tool_name": "geocode",
+      "tool_call_id": "tc_geo_001"
+    }
+  ],
+  "token_budget": {
+    "total_budget": 4096,
+    "total_used": 240,
+    "by_section": [
+      { "section_id": "sys", "section_type": "system_prompt", "token_count": 200 },
+      { "section_id": "user", "section_type": "user_message", "token_count": 15 },
+      { "section_id": "prev_tool", "section_type": "tool_result", "token_count": 25 }
+    ]
+  },
+  "model": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.0
+  },
+  "output": {
+    "type": "tool_calls",
+    "tool_calls": [
+      {
+        "tool_call_id": "tc_weather_001",
+        "tool_name": "get_weather",
+        "arguments": { "lat": 48.8566, "lon": 2.3522, "units": "metric" }
+      }
+    ],
+    "stop_reason": "tool_calls"
+  },
+  "metrics": {
+    "latency_ms": 800,
+    "input_tokens": 240,
+    "output_tokens": 45,
+    "cost_estimate_usd": 0.001050
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "format_version": "0.1.0",
+  "run_id": "run_custom",
+  "step_id": "step_001",
+  "step_index": 0,
+  "started_at": "2026-03-29T10:00:00.000Z",
+  "completed_at": "2026-03-29T10:00:01.000Z",
+  "sections": [
+    {
+      "section_id": "sys",
+      "type": "system_prompt",
+      "token_count": 100,
+      "content": "You are an assistant."
+    },
+    {
+      "section_id": "guardrail_1",
+      "type": "custom",
+      "source": "guardrail:toxicity_filter",
+      "token_count": 30,
+      "content": "Content passed toxicity check. Score: 0.02",
+      "custom_type": "guardrail_result",
+      "metadata": { "score": 0.02, "threshold": 0.5, "passed": true }
+    }
+  ],
+  "token_budget": {
+    "total_budget": 4096,
+    "total_used": 130,
+    "by_section": [
+      { "section_id": "sys", "section_type": "system_prompt", "token_count": 100 },
+      { "section_id": "guardrail_1", "section_type": "custom", "token_count": 30 }
+    ]
+  },
+  "model": {
+    "provider": "anthropic",
+    "model": "claude-3-5-haiku-20241022"
+  },
+  "output": {
+    "type": "text",
+    "text": "Here's the answer."
+  },
+  "metrics": {
+    "latency_ms": 400,
+    "input_tokens": 130,
+    "output_tokens": 20
+  }
+}

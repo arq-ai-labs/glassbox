@@ -1,0 +1,25 @@
+{
+  "_comment": "INVALID: rejection reason 'too_expensive' is not in the allowed enum",
+  "format_version": "0.1.0",
+  "run_id": "run_001",
+  "step_id": "step_001",
+  "step_index": 0,
+  "started_at": "2026-03-29T10:00:00.000Z",
+  "completed_at": "2026-03-29T10:00:01.000Z",
+  "sections": [],
+  "token_budget": {
+    "total_budget": 100,
+    "total_used": 0,
+    "by_section": [],
+    "rejected": [
+      {
+        "section_type": "retrieval",
+        "token_count": 500,
+        "reason": "too_expensive"
+      }
+    ]
+  },
+  "model": { "provider": "openai", "model": "gpt-4o" },
+  "output": { "type": "text" },
+  "metrics": { "latency_ms": 100, "input_tokens": 0, "output_tokens": 0 }
+}
