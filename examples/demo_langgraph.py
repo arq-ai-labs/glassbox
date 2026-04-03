@@ -5,7 +5,7 @@ and runs a multi-step scenario. Every LLM call within every node
 automatically produces a ContextPack.
 
 Usage:
-    pip install glassbox[langgraph,server] langchain-openai
+    pip install glassbox-ctx[langgraph,server] langchain-openai
     export OPENAI_API_KEY=sk-...
     python examples/demo_langgraph.py
 """

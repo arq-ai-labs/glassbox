@@ -1,7 +1,7 @@
 """Simple OpenAI demo — wrap a client, make a call, see the ContextPack.
 
 Usage:
-    pip install glassbox[openai,server]
+    pip install glassbox-ctx[openai,server]
     export OPENAI_API_KEY=sk-...
     python examples/demo_openai.py
     # Then: glassbox serve

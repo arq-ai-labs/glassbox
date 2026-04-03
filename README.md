@@ -5,7 +5,7 @@
 Glassbox captures a **ContextPack** for every LLM call your agent makes — what context went in, what got excluded and why, which model was used, what came out, and what it cost. One line of code. Zero config.
 
 ```bash
-pip install glassbox[openai,server]
+pip install glassbox-ctx[openai,server]
 ```
 
 ```python
@@ -273,19 +273,19 @@ The full spec is in [`spec/CONTEXTPACK_SPEC.md`](spec/CONTEXTPACK_SPEC.md) with 
 
 ```bash
 # Just OpenAI
-pip install glassbox[openai]
+pip install glassbox-ctx[openai]
 
 # Just Anthropic
-pip install glassbox[anthropic]
+pip install glassbox-ctx[anthropic]
 
 # LangGraph agents
-pip install glassbox[langgraph]
+pip install glassbox-ctx[langgraph]
 
 # With the viewer UI
-pip install glassbox[openai,server]
+pip install glassbox-ctx[openai,server]
 
 # Everything
-pip install glassbox[all]
+pip install glassbox-ctx[all]
 ```
 
 Requires Python 3.10+.
@@ -320,7 +320,7 @@ Opens a local UI at `http://localhost:4100` showing all captured runs and steps.
 
 ```bash
 cd your-project/
-pip install glassbox[all] openai
+pip install glassbox-ctx[all] openai
 python -c "from glassbox import proxy; proxy(provider='ollama', proxy_port=4050, viewer_port=4100, working_dir='.')"
 ```
 

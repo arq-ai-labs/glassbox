@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "glassbox"
+name = "glassbox-ctx"
 version = "0.1.0"
 description = "AI context observability. See what your LLM saw."
 readme = "README.md"

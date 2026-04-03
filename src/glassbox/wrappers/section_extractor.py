@@ -41,7 +41,7 @@ def _get_tiktoken():
 def estimate_tokens(text: str) -> int:
     """Estimate token count. Uses tiktoken (accurate) when installed, else heuristic.
 
-    Install tiktoken for accurate counts: pip install glassbox[accurate]
+    Install tiktoken for accurate counts: pip install glassbox-ctx[accurate]
     """
     global _warned_heuristic
     if not text:
@@ -54,7 +54,7 @@ def estimate_tokens(text: str) -> int:
         _warned_heuristic = True
         logger.warning(
             "tiktoken not installed — token counts are estimates (~20%% error). "
-            "Install for accurate counts: pip install glassbox[accurate]"
+            "Install for accurate counts: pip install glassbox-ctx[accurate]"
         )
     return math.ceil(len(text) / 4 * 1.1)
 

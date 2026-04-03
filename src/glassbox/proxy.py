@@ -68,7 +68,7 @@ def proxy(
         import httpx  # noqa: F401
         from starlette.applications import Starlette  # noqa: F401
     except ImportError:
-        print("Proxy requires server extras. Install with: pip install glassbox[server]")
+        print("Proxy requires server extras. Install with: pip install glassbox-ctx[server]")
         print("Also: pip install httpx")
         return
 

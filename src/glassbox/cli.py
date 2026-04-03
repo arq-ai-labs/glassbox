@@ -10,7 +10,7 @@ def cli() -> None:
     try:
         import click
     except ImportError:
-        print("CLI requires click. Install with: pip install glassbox[cli]")
+        print("CLI requires click. Install with: pip install glassbox-ctx[cli]")
         return
 
     @click.group(invoke_without_command=True)
@@ -35,7 +35,7 @@ def cli() -> None:
             _serve(port=port, directory=dir)
         except ImportError:
             click.echo(
-                "Viewer requires server extras. Install with: pip install glassbox[server]"
+                "Viewer requires server extras. Install with: pip install glassbox-ctx[server]"
             )
 
     @main.command()
@@ -54,7 +54,7 @@ def cli() -> None:
                    viewer_port=viewer_port, storage_dir=dir, working_dir=working_dir)
         except ImportError:
             click.echo(
-                "Proxy requires server extras. Install with: pip install glassbox[server]"
+                "Proxy requires server extras. Install with: pip install glassbox-ctx[server]"
             )
 
     @main.command()
